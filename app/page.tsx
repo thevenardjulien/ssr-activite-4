@@ -3,7 +3,7 @@ import MainLayout from "@/components/MainLayout";
 import Link from "next/link";
 import { Eye } from "@deemlol/next-icons";
 import { getTodos } from "@/utils/todos";
-import { Todo } from "@/types/todos";
+import { Todos } from "@/types/todos";
 
 
 export const metadata: Metadata = {
@@ -13,17 +13,17 @@ export const metadata: Metadata = {
 
 export default async function Home() {
 
-  const todos: Todo[] = await getTodos();
+  const todos: Todos = await getTodos();
   
   return (
     <MainLayout>
       <h1 className="text-3xl font-bold underline">Hello World</h1>
       <ul className="list-disc flex flex-col gap-4">
-        {todos.map((todo) => (
-          <li className="flex items-center gap-4" key={todo.id}>
-            <p>{todo.title}</p>
+        {todos && todos.map((todo) => (
+          <li className="flex items-center gap-4" key={todo && todo.id}>
+            <p>{todo && todo.title}</p>
             <div className="flex gap-2 items-center">
-              <Link href={`/tasks/task/${todo.id}`}>
+              <Link href={`/tasks/task/${todo && todo.id}`}>
                 <Eye
                   size={24}
                   color={`var(--color-neutral-700)`}
