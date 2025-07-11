@@ -2,7 +2,7 @@ import MainLayout from "@/components/MainLayout";
 import { Todo } from "@/types/todos";
 import Link from "next/link";
 import type { Metadata } from "next";
-import { getOneTodo } from "@/utils/todos";
+import { getTodo } from "@/utils/todos";
 
 type Props = {
     params: Promise<{ id: string }>
@@ -12,7 +12,7 @@ type Props = {
     { params }: Props,
   ): Promise<Metadata> {
     const { id } = await params
-    const task: Todo = await getOneTodo(id);
+    const task: Todo = await getTodo(id);
     return {
         title: task.title,
         description: task.title,
@@ -22,7 +22,7 @@ type Props = {
 export default async function TaskPage({ params }: Props) {
 
     const { id } = await params
-    const task: Todo = await getOneTodo(id);
+    const task: Todo = await getTodo(id);
 
     return (
         <MainLayout>  
