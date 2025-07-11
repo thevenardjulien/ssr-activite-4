@@ -2,6 +2,7 @@ import MainLayout from "@/components/MainLayout";
 import { Todo } from "@/types/todos";
 import Link from "next/link";
 import type { Metadata } from "next";
+import { getOneTodo } from "@/utils/todos";
 
 type Props = {
     params: Promise<{ id: string }>
@@ -11,20 +12,17 @@ type Props = {
     { params }: Props,
   ): Promise<Metadata> {
     const { id } = await params
-   
-    const task: Todo = await fetch(`https://jsonplaceholder.typicode.com/todos/${id}`).then((res) => res.json())
-   
+    const task: Todo = await getOneTodo(id);
     return {
         title: task.title,
         description: task.title,
-
     }
   }
 
 export default async function TaskPage({ params }: Props) {
 
     const { id } = await params
-    const task: Todo = await fetch(`https://jsonplaceholder.typicode.com/todos/${id}`).then((res) => res.json())
+    const task: Todo = await getOneTodo(id);
 
     return (
         <MainLayout>  
